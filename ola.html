@@ -1,285 +1,415 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nosso Amor em Pixels</title>
+    <title>Carlos & Michela - Nossa História de Amor</title>
+    
+    <!-- Fontes Modernas -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Quicksand:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap e Animate.css -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Animate.css para animações -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <!-- Bootstrap JS (Popper incluído) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
     <style>
         :root {
-            --primary-color:rgb(255, 93, 93);
-            --secondary-color:rgb(253, 128, 128);
-            --accent-color: #ffd7d7;
+            --primary-color:rgb(92, 87, 88);
+            --secondary-color:rgb(68, 60, 60);
+            --accent-color:rgb(255, 71, 71);
+            --gradient-light:rgb(165, 110, 110);
+            --gradient-dark:rgb(0, 0, 0);
+            --text-dark:rgb(255, 255, 255);
+            --gradient-nav: linear-gradient(120deg, #fff 60%,rgb(0, 0, 0) 40%);
         }
 
         body {
+            font-family: 'Quicksand', sans-serif;
+            color: var(--text-dark);
             overflow-x: hidden;
+            background: linear-gradient(135deg, var(--gradient-light) 0%, rgba(255, 255, 255, 0.3) 100%);
         }
 
-        .hero-slider {
-            height: 90vh;
+        /* Navbar Moderno */
+        .custom-navbar {
+            background: black;
+            padding: 20px 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
         }
 
-        .carousel-item {
-            height: 90vh;
+        .navbar-brand {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.4rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Modal Elegante */
+        .love-modal-content {
+            background: linear-gradient(135deg,rgb(238, 111, 111) 0%,rgb(177, 128, 128) 100%); /* Tons suaves de rosa e lilás */
+            border-radius: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2); /* Sombra mais suave */
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Borda mais discreta */
+            overflow: hidden;
+        }
+
+        /* Corpo do modal */
+        .love-modal-body {
+            padding: 3.5rem;
+            background: rgba(224, 224, 224, 0.2); /* Transparência suave no fundo */
+            backdrop-filter: blur(8px); /* Leve desfocamento */
+        }
+
+        /* Título do modal */
+        .love-title {
+            font-family: 'Dancing Script', cursive; /* Fonte mais fluída e romântica */
+            font-size: 4.5rem; /* Tamanho do texto um pouco maior */
+            color:rgb(243, 74, 82); /* Cor de rosa suave */
+            text-shadow: 2px 2px 15px rgba(255, 30, 86, 0.3); /* Brilho mais suave */
+            animation: glow 2s ease-in-out infinite alternate; /* Efeito de brilho suave */
+        }
+
+
+        /* Hero Section */
+        .hero-carousel {
+            margin-top: 0;
+        }
+
+        .hero-slide {
+            height: 100vh;
             background-size: cover;
             background-position: center;
             position: relative;
         }
 
-        .carousel-item::before {
+        .hero-slide::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(45deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3));
+            background: linear-gradient(to bottom, rgba(37, 29, 58, 0.4), rgba(37, 29, 58, 0.7));
+            z-index: 1;
         }
 
         .carousel-caption {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            padding: 3.2rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            max-width: 900px;
+            margin: 0 auto;
+            transform: translateY(-50%);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
 
-        .memory-card {
-            transition: all 0.5s ease;
-            border: none;
-            background: rgba(255, 255, 255, 0.9); /* Fundo leve */
-            backdrop-filter: blur(5px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border-radius: 1rem; /* Arredondar bordas */
-        }
-        
-        .memory-card:hover {
-            /*transform: translateY(-15px) rotate(2deg);  Efeito de levitação e rotação */
-            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.2); /* Sombra com cor vibrante */
-        }
-        
-        .memory-card {
-            background: linear-gradient(135deg,rgb(80, 80, 80),rgb(99, 99, 99)); /* Gradiente quente */
-            background-size: 400% 400%;
-            animation: gradientBackground 5s ease infinite; /* Animação suave de gradiente */
-        }
-        
-        /* Animação do gradiente */
-        @keyframes gradientBackground {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .memory-card:hover {
-            background: linear-gradient(135deg, #ff5e62, #ff9966); /* Gradiente dinâmico ao passar o mouse */
-            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.3); /* Sombra mais forte */
-        }
-        
-        /* Alterando a cor do título e texto */
-        .memory-card .card-title {
-            color: #ffffff; /* Título branco */
-            font-size: 1.25rem;
-            font-weight: bold;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3); /* Sombra suave no texto */
-        }
-        
-        .memory-card .card-text {
-            color: #f0f0f0; /* Texto mais claro */
-            font-size: 1rem;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-        }
-        
-
-        .love-counter {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 10px 30px rgba(255,107,107,0.2);
-        }
-
-        .section-title {
+        /* Cards Modernos */
+        .love-message-card {
+            background: rgba(187, 149, 149, 0.95);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
             position: relative;
-            display: inline-block;
-            padding-bottom: 1rem;
-            color: var(--primary-color);
+            overflow: hidden;
+            height: 100%;
         }
 
-        .section-title::after {
+        .love-message-card::before {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 25%;
-            width: 50%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
-        }
-
-        .love-message {
-            background: linear-gradient(135deg, #fff5f5, #fff0f0);
-            padding: 2rem;
-            border-radius: 1rem;
-            margin: 1rem 0;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .love-message:hover {
-            transform: scale(1.02);
-        }
-
-        .love-message::before {
-            content: '❤️';
-            position: absolute;
-            top: -15px;
-            right: -15px;
-            font-size: 3rem;
-            opacity: 0.1;
-        }
-
-        .floating-hearts {
-            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 30, 86, 0.1), rgba(37, 29, 58, 0.1));
+            z-index: -1;
+            transition: transform 0.4s ease;
+            transform: scale(0.8);
+            opacity: 0;
         }
 
-        .video-section {
-            background: linear-gradient(135deg, #000, #1a1a1a);
-            padding: 4rem 0;
-            color: white;
+        .love-message-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.15);
         }
-        
-        .video-container {
-            position: relative;
-            width: 100%;
-            max-width: 100%;
-            height: auto;
-            border-radius: 1rem;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-        }
-        
-        .video-container video {
-            width: 100%;
-            height: auto;
-            border-radius: 1rem;
-            display: block;
-        }
-        
 
-        .declaration-modal .modal-content {
-            background: linear-gradient(135deg, #fff5f5, #fff0f0);
+        /* Aumentando o tamanho do texto */
+        .love-message-card p {
+            font-size: 1.3rem; /* Aumento do tamanho do texto */
+            line-height: 1.6; /* Espaçamento entre as linhas */
+            font-family: cursive;
+            color: #fff; /* Cor do texto */
+        }
+
+        .love-message-card h5 {
+            font-size: 2.2rem; /* Tamanho maior para o título */
+            font-family: 'Great Vibes', cursive; /* Fonte cursiva, elegante */
+            color:rgb(255, 255, 255); /* Cor de rosa suave */
+            margin-bottom: 1rem;
+        }
+
+
+        /* Memory Cards - Altura Aumentada */
+        .memory-card {
             border: none;
-            border-radius: 1rem;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(209, 209, 209, 0.7); /* Cor preta com transparência */
+            height: 500px; /* Altura aumentada */
+            display: flex;
+            flex-direction: column;
         }
 
-        .heart-beat {
-            animation: heartBeat 1.5s infinite;
+        /* Imagem do card */
+        .memory-card img {
+            height: 300px; /* Altura aumentada da imagem */
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        @keyframes heartBeat {
-            0% { transform: scale(1); }
-            14% { transform: scale(1.3); }
-            28% { transform: scale(1); }
-            42% { transform: scale(1.3); }
-            70% { transform: scale(1); }
+        /* Efeito hover no card */
+        .memory-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
         }
 
+        /* Efeito hover na imagem */
+        .memory-card:hover img {
+            transform: scale(1.0) rotate(1deg);
+        }
+
+        /* Corpo do card */
+        .memory-card .card-body {
+            background: linear-gradient(to bottom, rgb(194, 135, 135), rgb(207, 114, 114)); /* Fundo escuro com transparência */
+            padding: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* Título do card */
+        .memory-title {
+            font-family: 'Cinzel', serif;
+            color:rgb(255, 255, 255); /* Cor de texto vermelho suave */
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Texto do card */
+        .memory-text {
+            color:rgb(255, 255, 255); /* Cor suave de rosa claro */
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+
+        /* Animações Especiais */
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(255, 30, 86, 0.5),
+                           0 0 20px rgba(255, 30, 86, 0.5);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(255, 30, 86, 0.8),
+                           0 0 40px rgba(255, 30, 86, 0.8);
+            }
+        }
+
+        .floating-heart {
+            position: fixed;
+            left: calc(50% - 1.1rem); /* Centraliza o coração inicialmente */
+            bottom: -10vh; /* Começa ligeiramente abaixo da tela */
+            font-size: 2.2rem;
+            filter: drop-shadow(0 0 8px rgba(255, 30, 86, 0.6));
+            animation: floatHeart 6s ease-in-out forwards;
+        }
+        
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            30% {
+                transform: translateY(-30vh) rotate(120deg) scale(1.3);
+                opacity: 0.9;
+            }
+            60% {
+                transform: translateY(-60vh) rotate(240deg) scale(1.6);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        /* Video Section */
+        .video-container {
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(185, 165, 165, 0.95);
+            padding: 12px;
+        }
+
+        .video-player {
+            width: 100%;
+            border-radius: 20px;
+            
+        }
+
+        /* Mobile Otimizado */
+        @media (max-width: 768px) {
+            .custom-navbar {
+                background: linear-gradient(120deg, #fff 70%, var(--secondary-color) 30%);
+            }
+
+            .memory-card {
+                height: 300px;
+                margin-bottom: 2rem;
+            }
+
+            .memory-card img {
+                height: 300px;
+            }
+        }
+
+        /* Efeitos de Rolagem */
         .scroll-reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+            transform: translateY(50px) scale(0.95);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .scroll-reveal.revealed {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
 
-        /* Estilo para o nome na navbar */
-        /* Navbar com fundo atraente */
-        .navbar {
-            background: linear-gradient(45deg,rgb(116, 108, 108),rgb(58, 58, 58));  /* Gradiente vibrante */
-            box-shadow: 0 4px 8px rgba(175, 175, 175, 0.94);  /* Sombra suave para destacar */
-            transition: background-color 0.3s ease;  /* Transição suave para hover */
+
+        /* Card de Contagem de Amor */
+        .love-counter-card {
+            background: linear-gradient(135deg, rgba(255, 30, 86, 0.2), rgba(37, 29, 58, 0.2)); /* Gradiente mais suave */
+            padding: 3rem;
+            border-radius: 20px; /* Bordas mais suaves */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            position: relative;
         }
-        
-        /* Navbar brand */
-        .navbar-brand {
-            font-size: 1.6rem;  /* Tamanho da fonte */
-            font-weight: 700;  /* Negrito */
-            color: #fff;  /* Cor do texto */
-            text-transform: uppercase;  /* Maiúsculas */
-            letter-spacing: 2px;  /* Espaçamento entre letras */
-            font-family: 'Dancing Script', cursive, sans-serif;  /* Fonte cursiva elegante */
-            transition: transform 0.3s ease;  /* Efeito suave */
+
+        /* Efeito de hover para o card */
+        .love-counter-card:hover {
+            transform: translateY(-12px); /* Elevação suave */
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
         }
-        
-        /* Efeito de hover na navbar */
-        .navbar:hover {
-            background: linear-gradient(45deg, #ff9f40, #ff6f61);  /* Inverte o gradiente ao passar o mouse */
+
+        /* Efeito de brilho suave no título */
+        .love-counter-card h3 {
+            font-size: 2.5rem;
+            color: #fff;
+            font-family: 'Great Vibes', cursive;
+            text-shadow: 2px 2px 10px rgba(255, 30, 86, 0.5); /* Brilho suave */
         }
-        
-        /* Efeito de hover no nome */
-        .navbar-brand:hover {
-            transform: scale(1.1);  /* Aumenta o tamanho */
+
+        /* Estilos para os itens de contagem */
+        .counter-item h4 {
+            font-size: 2.0rem; /* Aumento do tamanho dos números */
+            color: rgb(243, 23, 34); /* Rosa suave */
+            text-shadow: 1px 1px 4px rgba(255, 30, 86, 0.3); /* Sombra suave para destaque */
         }
-        
-        /* Estilo do menu */
-        .navbar-nav .nav-link {
-            color: #fff !important;  /* Cor das links */
-            font-size: 1.1rem;  /* Tamanho do texto */
-            margin: 0 10px;  /* Espaçamento entre os links */
-            transition: color 0.3s ease;
+
+        .counter-item p {
+            font-size: 1.2rem;
+            color: #fff; /* Contraste suave */
+            font-weight: 400;
         }
-        
-        .navbar-nav .nav-link:hover {
-            color:rgb(110, 108, 106) !important;  /* Cor ao passar o mouse */
+
+        /* Estilo para os textos abaixo das contagens */
+        .history-text {
+            font-size: 1.4rem;
+            color: rgb(39, 36, 36); /* Cor suave e romântica */
+            margin-top: 1rem;
+            text-align: center;
         }
-        
+
+        .history-description {
+            font-size: 1.2rem;
+            color: rgb(0, 0, 0); /* Texto suave para o fundo */
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
+        /* Adicionando corações ao título */
+        .love-counter-card h3::after {
+            content: "🌹"; /* Ícone de coração */
+            font-size: 2rem;
+            margin-left: 10px;
+            animation: pulse 1.5s infinite alternate; /* Efeito de pulsar no coração */
+        }
+
+        /* Animação para o efeito de pulsação no coração */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
 
     </style>
 </head>
-<body>
-    <!-- Modal de Declaração -->
+<!-- Modal de Declaração -->
 <div class="modal fade declaration-modal" id="loveModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="background: linear-gradient(145deg,rgb(253, 92, 80),rgb(245, 157, 149)); color: #fff; border-radius: 15px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); border: none;">
-            <div class="modal-header border-0 text-light">
-                <button type="button" class="btn-close btn-light" data-bs-dismiss="modal" style="color: white;"></button>
+        <div class="modal-content love-modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close btn-light" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body text-center p-5">
-                <h3 class="mb-3 mt-4" style="font-family: 'Dancing Script', cursive; font-size: 3rem; color: #ff4040; animation: pulse 1.5s infinite;">❤️</h3>
-                <h4 class="mb-3" style="font-family: 'Dancing Script', cursive; font-size: 2rem; color: #fff; text-transform: uppercase; letter-spacing: 3px; animation: fadeIn 1s ease;">Carlos & Michela</h4>
-                <p class="lead text-muted" style="font-family: 'Roboto', sans-serif; font-size: 1.2rem; color: #fff; font-weight: 400;">Cada dia ao seu lado é uma nova aventura, uma nova chance de te amar ainda mais...</p>
-                <div class="heart-beat display-1 my-4" style="font-size: 5rem; animation: heartBeat 1s infinite;">❤️</div>
-                <p style="font-family: 'Roboto', sans-serif; font-size: 1.5rem; font-weight: bold; color: #ff4040;">Com todo o meu amor,</p>
-                <p style="font-family: 'Roboto', sans-serif; font-size: 1.5rem; font-weight: bold; color:rgb(218, 218, 218);">Carlos</p>
+            <div class="modal-body text-center love-modal-body">
+                <h3 class="love-title mb-3 mt-4">❤️</h3>
+                <h4 class="couple-names mb-3">Carlos & Michela</h4>
+                <p class="love-message">Cada dia ao seu lado é uma nova aventura, uma nova chance de te amar ainda mais...</p>
+                <div class="heart-animation my-4">❤️</div>
+                <p class="signature-text">Com todo o meu amor,</p>
+                <p class="signature-name">Carlos</p>
             </div>
         </div>
     </div>
 </div>
 
-
-
-    <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top custom-navbar">
     <div class="container">
         <a class="navbar-brand" href="#">💑 Carlos & Michela</a>
     </div>
 </nav>
 
-    <!-- Hero Slider -->
-<div id="heroSlider" class="carousel slide carousel-fade" data-bs-ride="carousel">
+<!-- Hero Slider -->
+<div id="heroSlider" class="carousel slide carousel-fade hero-carousel" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="0" class="active"></button>
         <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="1"></button>
@@ -287,24 +417,21 @@
     </div>
 
     <div class="carousel-inner">
-        <!-- Slide 1 -->
-        <div class="carousel-item active" style="background-image: url('fotos/us.jpg'); background-size: cover; background-position: center;">
+        <div class="carousel-item active hero-slide" style="background-image: url('fotos/us.jpg')">
             <div class="carousel-caption animate__animated animate__fadeInUp">
                 <h1 class="display-4 fw-bold">Nosso Amor em Pixels</h1>
                 <p class="lead">Cada momento especial eternizado aqui</p>
             </div>
         </div>
 
-        <!-- Slide 2 (Substituindo o vídeo por uma imagem) -->
-        <div class="carousel-item" style="background-image: url('fotos/hony.webp'); background-size: cover; background-position: center;">
+        <div class="carousel-item hero-slide" style="background-image: url('fotos/hony.webp')">
             <div class="carousel-caption animate__animated animate__fadeInUp">
                 <h1 class="display-4 fw-bold">Juntos para Sempre</h1>
                 <p class="lead">Nossa jornada repleta de amor</p>
             </div>
         </div>
 
-        <!-- Slide 3 -->
-        <div class="carousel-item" style="background-image: url('https://amorcronico.wordpress.com/wp-content/uploads/2016/08/casal-perfeito.jpg'); background-size: cover; background-position: center;">
+        <div class="carousel-item hero-slide" style="background-image: url('https://amorcronico.wordpress.com/wp-content/uploads/2016/08/casal-perfeito.jpg')">
             <div class="carousel-caption animate__animated animate__fadeInUp">
                 <h1 class="display-4 fw-bold">Para Sempre Nós</h1>
                 <p class="lead">Um amor que cresce a cada dia</p>
@@ -312,7 +439,6 @@
         </div>
     </div>
 
-    <!-- Botões de Navegação -->
     <button class="carousel-control-prev" type="button" data-bs-target="#heroSlider" data-bs-slide="prev">
         <span class="carousel-control-prev-icon"></span>
     </button>
@@ -321,187 +447,210 @@
     </button>
 </div>
 
-
-    <!-- Mensagens de Amor -->
-    <section class="py-5">
-        <div class="container">
-            <h2 class="text-center section-title mb-5">Mensagens do Coração</h2>
-            <div class="row g-4">
-                <div class="col-md-4 scroll-reveal">
-                    <div class="love-message">
-                        <h5>Primeiro Olhar</h5>
-                        <p>"Desde o primeiro momento em que te vi, soube que minha vida mudaria para sempre..."</p>
-                    </div>
-                </div>
-                <div class="col-md-4 scroll-reveal">
-                    <div class="love-message">
-                        <h5>Nosso Amor</h5>
-                        <p>"Cada dia ao seu lado é uma nova aventura, uma nova chance de te amar ainda mais..."</p>
-                    </div>
-                </div>
-                <div class="col-md-4 scroll-reveal">
-                    <div class="love-message">
-                        <h5>Para Sempre</h5>
-                        <p>"Você é meu presente e meu futuro, meu amor eterno..."</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Nossa História Section -->
-<section id="nossa-historia" class="py-5">
+<!-- Mensagens de Amor -->
+<section class="love-messages-section py-5">
     <div class="container">
-        <h2 class="text-center section-title mb-5">Nossa História</h2>
-        <div class="row align-items-center">
-            <div class="col-md-6 text-center mb-1">
-                <!-- Link para abrir a imagem -->
-                <a href="fotos/foto1.webp" target="_blank">
-                    <img src="fotos/foto1.webp" class="card-img-top" alt="Momento 1">
-                </a>
-            </div>
-            <div class="col-md-6">
-                <div class="love-counter mb-4">
-                    <h3 class="text-center mb-3">Nosso Amor em Números</h3>
-                    <div class="row text-center">
-                        <div class="col">
-                            <h4 id="daysCounter">365</h4>
-                            <p>Dias Juntos</p>
-                        </div>
-                        <div class="col">
-                            <h4 id="memoriesCounter">24</h4>
-                            <p>Horas Juntos</p>
-                        </div>
-                        <div class="col">
-                            <h4 id="placesCounter">86.400</h4>
-                            <p>Segundos Juntos</p>
-                        </div>
-                    </div>
+        <h2 class="text-center section-title mb-5">Mensagens do Coração</h2>
+        <div class="row g-4">
+            <div class="col-md-4 scroll-reveal">
+                <div class="love-message-card">
+                    <h5>Primeiro Olhar</h5>
+                    <p>"Desde o primeiro momento em que te vi, soube que minha vida mudaria para sempre..."</p>
                 </div>
-                <p class="lead">Nossa história começou em um dia especial...</p>
-                <p>Desde então, cada momento tem sido único e mágico...</p>
+            </div>
+            <div class="col-md-4 scroll-reveal">
+                <div class="love-message-card">
+                    <h5>Nosso Amor</h5>
+                    <p>"Cada dia ao seu lado é uma nova aventura, uma nova chance de te amar ainda mais..."</p>
+                </div>
+            </div>
+            <div class="col-md-4 scroll-reveal">
+                <div class="love-message-card">
+                    <h5>Para Sempre</h5>
+                    <p>"Você é meu presente e meu futuro, meu amor eterno..."</p>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- CSS para responsividade -->
-<style>
-    .img-historia {
-        width: 100%; /* Ocupa a largura total no celular */
-        max-width: 100%; /* Não ultrapassa a div */
-        height: auto; /* Mantém a proporção da imagem */
-    }
-</style>
+<!-- Nossa História -->
+<section id="nossa-historia" class="history-section py-5">
+    <div class="container">
+        <h2 class="text-center section-title mb-5">Nossa História</h2>
+        <div class="row align-items-center">
+            <div class="col-md-6 text-center mb-4">
+                <a href="fotos/foto1.webp" target="_blank" class="history-image-link">
+                    <img src="fotos/foto1.webp" class="img-fluid rounded shadow" alt="Momento 1">
+                </a>
+            </div>
+            <div class="col-md-6">
+                <div class="love-counter-card mb-4">
+                    <h3 class="text-center mb-3">Nosso Amor em Números 💖</h3>
+                    <div class="row text-center">
+                        <div class="col counter-item">
+                            <h4 id="daysCounter">365</h4>
+                            <p>Dias Juntos</p>
+                        </div>
+                        <div class="col counter-item">
+                            <h4 id="memoriesCounter">24</h4>
+                            <p>Horas Juntos</p>
+                        </div>
+                        <div class="col counter-item">
+                            <h4 id="placesCounter">86.400</h4>
+                            <p>Segundos Juntos</p>
+                        </div>
+                    </div>
+                    <!--<p class="lead history-text">
+                        ❤️ Nossa história começou em um dia especial... ❤️
+                    </p>-->
+                    <p class="history-description">
+                        💖 Desde o momento que te vi pela primeira vez na igreja, me apaixonei profundamente. Fiquei pensando: "Como eu faria para te pedir o número, sem que ninguém percebesse o motivo?" 💖
+                    </p>
+                    <p class="history-description">
+                        💕 Aquilo foi muito desafiador para mim, e hesitei tantas vezes! Mas, na última vez, enquanto cantávamos e eu estava prestes a te entregar o presente, algo veio na minha mente e disse: "Agora ou nunca!" Pois, se não fosse naquele momento, eu sabia que talvez não teria outra chance. 💕
+                    </p>
+                    <p class="history-description">
+                        💘 Eu acredito que esse pensamento, naquela última hora, era um anjo me revelando o meu verdadeiro amor. 💘
+                    </p>
+                    <p class="history-description">
+                        ❤️ Hoje sou muito feliz e grato a Deus pelo dia em que te conheci, pois encontrei a minha outra metade, a minha costela. ❤️
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
+<!-- Momentos Especiais -->
+<section id="momentos" class="special-moments-section py-5">
+    <div class="container">
+        <h2 class="text-center section-title mb-5">Momentos Especiais</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="memory-card h-100">
+                    <a href="fotos/foto5.jpg" target="_blank" class="memory-link">
+                        <img src="fotos/foto5.jpg" class="card-img-top" alt="Momento 1">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="memory-title">Primeiro Encontro</h5>
+                        <p class="memory-text">Aquele dia mágico que mudou nossas vidas...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="memory-card h-100">
+                    <a href="fotos/foto4.jpg" target="_blank" class="memory-link">
+                        <img src="fotos/foto4.jpg" class="card-img-top" alt="Momento 1">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="memory-title">Primeiro Encontro</h5>
+                        <p class="memory-text">Aquele dia mágico que mudou nossas vidas...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="memory-card h-100">
+                    <a href="fotos/20240919_133827.jpg" target="_blank" class="memory-link">
+                        <img src="fotos/20240919_133827.jpg" class="card-img-top" alt="Momento 1">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="memory-title">Primeiro Encontro</h5>
+                        <p class="memory-text">Aquele dia mágico que mudou nossas vidas...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="memory-card h-100">
+                    <a href="fotos/k.jpg" target="_blank" class="memory-link">
+                        <img src="fotos/k.jpg" class="card-img-top" alt="Momento 2">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="memory-title">Momentos Especiais</h5>
+                        <p class="memory-text">Cada dia é uma nova aventura...</p>
+                    </div>
+                </div>
+            </div>
 
-
-    <!-- Momentos Especiais -->
-    <section id="momentos" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center section-title mb-5">Momentos Especiais</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card memory-card h-100">
-                        <a href="fotos/20240919_133827.jpg" target="_blank">
-                            <img src="fotos/20240919_133827.jpg" class="card-img-top" alt="Momento 1">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">Primeiro Encontro</h5>
-                            <p class="card-text">Aquele dia mágico que mudou nossas vidas...</p>
-                        </div>
+            <div class="col-md-4">
+                <div class="memory-card h-100">
+                    <a href="fotos/20240919_133741.jpg" target="_blank" class="memory-link">
+                        <img src="fotos/20240919_133741.jpg" class="card-img-top" alt="Momento 3">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="memory-title">Momentos Especiais</h5>
+                        <p class="memory-text">Cada dia é uma nova aventura...</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card memory-card h-100">
-                        <a href="fotos/IMG_20240727_133529_437.webp" target="_blank">
-                            <img src="fotos/IMG_20240727_133529_437.webp" class="card-img-top" alt="Momento 1">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">Nossa Primeira Viagem</h5>
-                            <p class="card-text">Descobrindo o mundo juntos...</p>
-                        </div>
+            </div>
+            <div class="col-md-4">
+                <div class="memory-card h-100">
+                    <a href="fotos/20240919_133657.jpg" target="_blank">
+                        <img src="fotos/20240919_133657.jpg" class="card-img-top" alt="Momento 1">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="memory-title">Momentos Especiais</h5>
+                        <p class="memory-text">Cada dia é uma nova aventura...</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card memory-card h-100">
-                        <a href="fotos/alone.jpg" target="_blank">
-                            <img src="fotos/alone.jpg" class="card-img-top" alt="Momento 1">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">Momentos Especiais</h5>
-                            <p class="card-text">Cada dia é uma nova aventura...</p>
-                        </div>
+            </div>
+            <div class="col-md-4">
+                <div class="memory-card h-100">
+                    <a href="fotos/Snapchat-91491241.jpg" target="_blank">
+                        <img src="fotos/Snapchat-91491241.jpg" class="card-img-top" alt="Momento 1">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="memory-title">Momentos Especiais</h5>
+                        <p class="memory-text">Cada dia é uma nova aventura...</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card memory-card h-100">
-                        <a href="fotos/foto1.webp" target="_blank">
-                            <img src="fotos/foto1.webp" class="card-img-top" alt="Momento 1">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">Momentos Especiais</h5>
-                            <p class="card-text">Cada dia é uma nova aventura...</p>
-                        </div>
+            </div>
+            <div class="col-md-4">
+                <div class="memory-card h-100">
+                    <a href="fotos/alone.jpg" target="_blank">
+                        <img src="fotos/alone.jpg" class="card-img-top" alt="Momento 1">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="memory-title">Momentos Especiais</h5>
+                        <p class="memory-text">Cada dia é uma nova aventura...</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card memory-card h-100">
-                        <a href="fotos/20240919_133657.jpg" target="_blank">
-                            <img src="fotos/20240919_133657.jpg" class="card-img-top" alt="Momento 1">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">Momentos Especiais</h5>
-                            <p class="card-text">Cada dia é uma nova aventura...</p>
-                        </div>
+            </div>
+            <div class="col-md-4">
+                <div class="memory-card h-100">
+                    <a href="fotos/IMG_20240727_133529_437.webp" target="_blank">
+                        <img src="fotos/IMG_20240727_133529_437.webp" class="card-img-top" alt="Momento 1">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="memory-title">Momentos Especiais</h5>
+                        <p class="memory-text">Cada dia é uma nova aventura...</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card memory-card h-100">
-                        <a href="fotos/k.jpg" target="_blank">
-                            <img src="fotos/k.jpg" class="card-img-top" alt="Momento 1">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">Momentos Especiais</h5>
-                            <p class="card-text">Cada dia é uma nova aventura...</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card memory-card h-100">
-                        <a href="fotos/20240919_133741.jpg" target="_blank">
-                            <img src="fotos/20240919_133741.jpg" class="card-img-top" alt="Momento 1">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">Momentos Especiais</h5>
-                            <p class="card-text">Cada dia é uma nova aventura...</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card memory-card h-100">
-                        <a href="fotos/Snapchat-91491241.jpg" target="_blank">
-                            <img src="fotos/Snapchat-91491241.jpg" class="card-img-top" alt="Momento 1">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">Momentos Especiais</h5>
-                            <p class="card-text">Cada dia é uma nova aventura...</p>
-                        </div>
+            </div>
+            <div class="col-md-4">
+                <div class="memory-card h-100">
+                    <a href="fotos/foto2.webp" target="_blank">
+                        <img src="fotos/foto2.webp" class="card-img-top" alt="Momento 1">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="memory-title">Momentos Especiais</h5>
+                        <p class="memory-text">Cada dia é uma nova aventura...</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Seção de Vídeos -->
-    <!-- Seção de Vídeos -->
-<section class="video-section">
+<!-- Seção de Vídeos -->
+<section class="video-section py-5">
     <div class="container">
         <h2 class="text-center section-title mb-5">Nossos Momentos em Vídeo</h2>
         <div class="row g-4">
             <div class="col-md-6 scroll-reveal">
                 <div class="video-container">
-                    <video controls>
+                    <video controls class="video-player">
                         <source src="fotos/video1.mp4" type="video/mp4">
                         Seu navegador não suporta vídeos.
                     </video>
@@ -509,7 +658,7 @@
             </div>
             <div class="col-md-6 scroll-reveal">
                 <div class="video-container">
-                    <video controls>
+                    <video controls class="video-player">
                         <source src="fotos/video2.mp4" type="video/mp4">
                         Seu navegador não suporta vídeos.
                     </video>
@@ -517,7 +666,7 @@
             </div>
             <div class="col-md-6 scroll-reveal">
                 <div class="video-container">
-                    <video controls>
+                    <video controls class="video-player">
                         <source src="fotos/Snapchat-466515141.mp4" type="video/mp4">
                         Seu navegador não suporta vídeos.
                     </video>
@@ -525,8 +674,24 @@
             </div>
             <div class="col-md-6 scroll-reveal">
                 <div class="video-container">
-                    <video controls>
+                    <video controls class="video-player">
+                        <source src="fotos/video3.mp4" type="video/mp4">
+                        Seu navegador não suporta vídeos.
+                    </video>
+                </div>
+            </div>
+            <div class="col-md-6 scroll-reveal">
+                <div class="video-container">
+                    <video controls class="video-player">
                         <source src="fotos/Snapchat-810685547.mp4" type="video/mp4">
+                        Seu navegador não suporta vídeos.
+                    </video>
+                </div>
+            </div>
+            <div class="col-md-6 scroll-reveal">
+                <div class="video-container">
+                    <video controls class="video-player">
+                        <source src="fotos/Snapchat-783120799.mp4" type="video/mp4">
                         Seu navegador não suporta vídeos.
                     </video>
                 </div>
@@ -535,28 +700,31 @@
     </div>
 </section>
 
+<!-- Footer -->
+<footer class="love-footer bg-secondary text-light py-4">
+    <div class="container text-center">
+        <p class="footer-text">Feito com ❤️ para você</p>
+        <p class="copyright mb-0">© 2025 Nosso Amor em Pixels</p>
+    </div>
+</footer>
 
-    <!-- Footer -->
-    <footer class="bg-secondary text-light py-4">
-        <div class="container text-center">
-            <p>Feito com ❤️ para você</p>
-            <p class="mb-0">© 2025 Nosso Amor em Pixels</p>
-        </div>
-    </footer>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Abrir modal ao carregar a página
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                new bootstrap.Modal(document.getElementById('loveModal')).show();
-            }, 1000);
-        });
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Modal auto-show
+        setTimeout(() => {
+            const modal = document.getElementById('loveModal');
+            if (modal) {
+                new bootstrap.Modal(modal).show();
+            }
+        }, 1000);
+    
         // Animação de contador
         function animateCounter(elementId, finalNumber) {
             let current = 0;
             const element = document.getElementById(elementId);
+            if (!element) return;
+            
             const increment = finalNumber / 100;
             const timer = setInterval(() => {
                 current += increment;
@@ -567,61 +735,82 @@
                 }
             }, 20);
         }
-
+    
         // Revelar elementos ao scroll
         const revealElements = document.querySelectorAll('.scroll-reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-
-        revealElements.forEach(element => observer.observe(element));
-
+        if (revealElements.length > 0) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, { threshold: 0.1 });
+    
+            revealElements.forEach(element => observer.observe(element));
+        }
+    
         // Criar corações flutuantes
         function createHeart() {
             const heart = document.createElement('div');
-            heart.innerHTML = '❤️';
-            heart.style.position = 'fixed';
+            heart.classList.add('floating-heart');
+            heart.innerHTML = '💖💕';
+            
+            // Define posição aleatória dentro da tela
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.top = '100vh';
-            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-            heart.style.animation = `float ${Math.random() * 3 + 2}s linear`;
+            heart.style.top = '100vh'; // Inicia na parte inferior da tela
+            heart.style.fontSize = (Math.random() * 20 + 6) + 'px'; // Tamanho aleatório
+            heart.style.animationDuration = `${Math.random() * 3 + 2}s`; // Animação aleatória
+
+            // Define opacidade aleatória
             heart.style.opacity = Math.random() * 0.5 + 0.5;
+
             document.body.appendChild(heart);
 
+            // Remove o coração após 5 segundos
             setTimeout(() => {
                 heart.remove();
             }, 5000);
         }
 
-        setInterval(createHeart, 300);
-
-        // Adicionar animação ao carousel
-        document.getElementById('heroSlider').addEventListener('slide.bs.carousel', event => {
-            const caption = event.relatedTarget.querySelector('.carousel-caption');
-            caption.classList.remove('animate__fadeInUp');
-            setTimeout(() => {
-                caption.classList.add('animate__fadeInUp');
-            }, 10);
-        });
-    </script>
-
-    <style>
-        @keyframes float {
-            from {
-                transform: translateY(0vh) rotate(0deg);
-                opacity: 1;
-            }
-            to {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
+        // Criar um coração a cada 300ms (0.3s)
+        setInterval(createHeart, 400);
+        
+    
+        // Animação do carousel
+        const heroSlider = document.getElementById('heroSlider');
+        if (heroSlider) {
+            heroSlider.addEventListener('slide.bs.carousel', event => {
+                const caption = event.relatedTarget.querySelector('.carousel-caption');
+                if (caption) {
+                    caption.classList.remove('animate__fadeInUp');
+                    setTimeout(() => {
+                        caption.classList.add('animate__fadeInUp');
+                    }, 10);
+                }
+            });
         }
-    </style>
+    
+        // Iniciar contadores quando a seção estiver visível
+        const counterSection = document.querySelector('.love-counter');
+        let countersStarted = false;
+    
+        if (counterSection) {
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !countersStarted) {
+                        animateCounter('daysCounter', 365);
+                        animateCounter('memoriesCounter', 24);
+                        animateCounter('placesCounter', 86400);
+                        countersStarted = true;
+                    }
+                });
+            }, { threshold: 0.5 });
+    
+            counterObserver.observe(counterSection);
+        }
+    });
+    </script>
+    
 </body>
 </html>
